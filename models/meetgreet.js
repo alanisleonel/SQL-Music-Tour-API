@@ -1,6 +1,14 @@
 const {Sequelize, DataTypes, Model} = require('sequelize')
 
-class MeetGreet extends Model{}
+class MeetGreet extends Model{
+  static associate ({ Band }) {
+    // band
+    MeetGreet.belongsTo(Band, {
+        foreignKey: "band_id",
+        as: "band"
+    })
+}
+}
 MeetGreet.init({
     meet_greet_id: {
         type: DataTypes.INTEGER,

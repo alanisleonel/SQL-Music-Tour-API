@@ -1,6 +1,15 @@
 const {Sequelize, DataTypes, Model} = require('sequelize')
 
-class Event extends Model{}
+class Event extends Model{
+    static associate ({ Stage, StageEvent }) {
+        // stages
+        Event.belongsToMany(Stage, {
+            foreignKey: "event_id",
+            as: "stages",
+            through: StageEvent
+        })
+    }
+}
 Event.init({
     event_id: {
         type: DataTypes.INTEGER,
